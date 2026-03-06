@@ -3,7 +3,7 @@ import { sharedTranslations, mergeTranslations, type Translations } from "best-t
 const siteTranslations: Translations = {
   en: {
     appName: "Best Sleep Time",
-    appNameSub: "הזמן הטוב לתנומה",
+    appNameSub: "הזמן הטוב לשינה",
     nap: "Nap",
     night: "Night Sleep",
     napDuration: "Nap Duration",
@@ -18,7 +18,7 @@ const siteTranslations: Translations = {
       "This app analyzes real-time rocket alert data from Pikud HaOref to help you sleep with confidence. Two modes: Nap (15-90 min) tells you whether it's safe to nap now or better to wait. Night Sleep is a confidence check — you're going to sleep regardless, but it tells you how prepared to be: on a quiet night, sleep soundly; on an active night, keep shoes and phone nearby or sleep in the safe room. The score factors in time since the last alert, average gaps, frequency trends, and 24-hour alert counts.",
   },
   he: {
-    appName: "הזמן הטוב לתנומה",
+    appName: "הזמן הטוב לשינה",
     appNameSub: "Best Sleep Time",
     nap: "תנומה",
     night: "שינת לילה",

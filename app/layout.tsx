@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     apple: "/icons/icon-192.png",
   },
   title: {
-    default: "Best Sleep Time | הזמן הטוב לתנומה",
+    default: "Best Sleep Time | הזמן הטוב לשינה",
     template: "%s | Best Sleep Time",
   },
   description:
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     "Pikud HaOref",
     "פיקוד העורף",
     "best sleep time",
-    "הזמן הטוב לתנומה",
+    "הזמן הטוב לשינה",
     "real-time alerts",
     "צבע אדום",
     "alert analysis",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Best Sleep Time | הזמן הטוב לתנומה",
+    title: "Best Sleep Time | הזמן הטוב לשינה",
     description:
       "Is it safe to sleep right now? Real-time rocket alert analysis for Israelis — powered by Pikud HaOref data.",
     siteName: "Best Sleep Time",
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Sleep Time | הזמן הטוב לתנומה",
+    title: "Best Sleep Time | הזמן הטוב לשינה",
     description:
       "Is it safe to sleep right now? Real-time rocket alert analysis for Israelis.",
   },

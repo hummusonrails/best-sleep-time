@@ -70,7 +70,7 @@ export function getRecommendation(
       },
       risky: {
         en: "RISKY TIME TO NAP",
-        he: "זמן מסוכן לתנומה",
+        he: "זמן מסוכן לשינה",
       },
       dangerous: {
         en: "DO NOT NAP NOW",
