@@ -109,16 +109,10 @@ export default function Home() {
           <Header />
         </ScrollReveal>
         <CrossPromoBanner
-          href="https://bestshowertime.com"
-          name="Best Shower Time"
-          promptEn="Need a shower too? Check out"
-          promptHe="גם צריכים להתקלח? בדקו את"
-        />
-        <CrossPromoBanner
-          href="https://bestwalkingtime.com"
-          name="Best Walk Time"
-          promptEn="Going for a walk? Check out"
-          promptHe="יוצאים לטיול? בדקו את"
+          sites={[
+            { href: "https://bestshowertime.com", name: "Best Shower Time", promptEn: "Need a shower too? Check out", promptHe: "גם צריכים להתקלח? בדקו את" },
+            { href: "https://bestwalkingtime.com", name: "Best Walk Time", promptEn: "Going for a walk? Check out", promptHe: "יוצאים לטיול? בדקו את" },
+          ]}
         />
 
         <main className="flex flex-col items-center gap-10 pb-10">
