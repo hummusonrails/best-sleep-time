@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
+export const revalidate = 86400;
 
 export const alt = "Best Sleep Time - Real-time rocket alert analysis for safe sleep decisions";
 export const size = {
