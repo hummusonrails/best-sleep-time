@@ -22,6 +22,7 @@ import {
 } from "best-time-ui";
 import NapSettings from "@/components/NapSettings";
 import LocationSelector from "@/components/LocationSelector";
+import PreAlertStatusCard from "@/components/PreAlertStatusCard";
 import { getRecommendation } from "@/lib/safety";
 import { SleepType } from "@/lib/types";
 
@@ -223,6 +224,11 @@ export default function Home() {
           <ScrollReveal>
             <SafetyVerdict recommendation={recommendation} />
           </ScrollReveal>
+          {preAlertStatus && (
+            <ScrollReveal>
+              <PreAlertStatusCard preAlertStatus={preAlertStatus} />
+            </ScrollReveal>
+          )}
           <ScrollReveal direction="left" delay={100}>
             <NapSettings
               sleepType={sleepType}
