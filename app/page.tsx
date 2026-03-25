@@ -224,11 +224,6 @@ export default function Home() {
           <ScrollReveal>
             <SafetyVerdict recommendation={recommendation} />
           </ScrollReveal>
-          {preAlertStatus && (
-            <ScrollReveal>
-              <PreAlertCard preAlertStatus={preAlertStatus} preAlerts={preAlerts} />
-            </ScrollReveal>
-          )}
           <ScrollReveal direction="left" delay={100}>
             <NapSettings
               sleepType={sleepType}
@@ -254,8 +249,13 @@ export default function Home() {
           <ScrollReveal delay={150} className="w-full">
             <StatsGrid stats={stats} />
           </ScrollReveal>
+          {preAlertStatus && (
+            <ScrollReveal>
+              <PreAlertCard preAlertStatus={preAlertStatus} preAlerts={preAlerts} />
+            </ScrollReveal>
+          )}
           <ScrollReveal delay={100} className="w-full">
-            <AlertTimeline alerts={filteredAlerts} />
+            <AlertTimeline alerts={filteredAlerts} preAlerts={preAlerts} />
           </ScrollReveal>
           <ScrollReveal>
             <HowItWorks />
