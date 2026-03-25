@@ -1,4 +1,10 @@
-import { type SafetyStats, type SafetyLevel, type SafetyRecommendation } from "best-time-ui";
+import {
+  type SafetyStats,
+  type SafetyLevel,
+  type SafetyRecommendation,
+  type PreAlertStatus,
+  calculateSafetyScore,
+} from "best-time-ui";
 import { type SleepType } from "./types";
 
 /**
@@ -10,6 +16,7 @@ import { type SleepType } from "./types";
  *   - Shorter sleep, can be delayed if conditions are bad
  *   - Thresholds are stricter than shower but not extreme
  *   - "dangerous" = genuinely skip this nap, try again later
+ *   - Pre-alert data: warningCount2h >= 2 downgrades verdict
  *
  * NIGHT SLEEP (confidence check):
  *   - Everyone sleeps at night regardless — this isn't about skipping sleep
@@ -17,16 +24,30 @@ import { type SleepType } from "./types";
  *   - "safe" = quiet night expected, sleep confidently
  *   - "risky" = keep your shoes and phone nearby, sleep light
  *   - "dangerous" = expect interruptions, sleep in/near the shelter
+ *   - Pre-alert data: warningCount6h >= 2 adds advisory message but doesn't change threshold
  */
 
 export function getRecommendation(
   stats: SafetyStats,
   duration: number,
   wakeUpTime: number,
-  sleepType: SleepType
+  sleepType: SleepType,
+  preAlertStatus?: PreAlertStatus | null
 ): SafetyRecommendation {
-  const { safetyScore, timeSinceLastAlert, averageGap, alertCount24h } = stats;
+  const { timeSinceLastAlert, averageGap, alertCount24h, trend } = stats;
   const effectiveDuration = duration + wakeUpTime;
+
+  // Recompute safety score with pre-alert data for nap mode
+  const safetyScore =
+    sleepType === "nap" && preAlertStatus
+      ? calculateSafetyScore(
+          timeSinceLastAlert,
+          averageGap,
+          trend,
+          alertCount24h,
+          preAlertStatus
+        )
+      : stats.safetyScore;
 
   let level: SafetyLevel;
 
@@ -41,6 +62,12 @@ export function getRecommendation(
       level = "safe";
     } else {
       level = "risky";
+    }
+
+    // Pre-alert downgrade: warningCount2h >= 2 downgrades verdict by one level
+    if (preAlertStatus && preAlertStatus.warningCount2h >= 2) {
+      if (level === "safe") level = "risky";
+      else if (level === "risky") level = "dangerous";
     }
   } else {
     // Night sleep — confidence assessment
@@ -93,10 +120,23 @@ export function getRecommendation(
     },
   };
 
+  // Night mode with elevated pre-alert activity: override message to shelter advisory
+  let messageEn = messages[sleepType][level].en;
+  let messageHe = messages[sleepType][level].he;
+
+  if (
+    sleepType === "night" &&
+    preAlertStatus &&
+    preAlertStatus.warningCount6h >= 2
+  ) {
+    messageEn = "SLEEP NEAR YOUR SAFE ROOM TONIGHT";
+    messageHe = "ישנו ליד המרחב המוגן הלילה";
+  }
+
   return {
     level,
     score: safetyScore,
-    message: messages[sleepType][level].en,
-    messageHe: messages[sleepType][level].he,
+    message: messageEn,
+    messageHe: messageHe,
   };
 }
