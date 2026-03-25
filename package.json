@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",
-    "best-time-ui": "github:hummusonrails/best-time-ui#feat/pre-alert-support",
+    "best-time-ui": "github:hummusonrails/best-time-ui",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
